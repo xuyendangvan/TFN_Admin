@@ -1,0 +1,258 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+            </div>
+            <div class="col-md-3 pull-right">
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right" data-toggle="modal"
+                    data-target="#create">
+                    <i class="material-icons">add</i>
+                    Tạo học sinh
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+
+                        <h4 class="card-title ">Danh sách học sinh</h4>
+                        <p class="card-category">Tổng hợp danh sách học sinh</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]='dataSource'>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="id">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> ID. </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+
+                                    </ng-container>
+
+                                    <!--avatar Column -->
+                                    <ng-container matColumnDef="avatar">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Avatar </th>
+                                        <td mat-cell *matCellDef="let element">
+
+                                            <img alt="Avatar" class="avatar" src="./assets/img/faces/portrait.jpg" />
+
+                                        </td>
+
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="name">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Họ tên </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+
+                                    <!-- Bday Column -->
+                                    <ng-container matColumnDef="bday">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Ngày sinh </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.bday}} </td>
+                                    </ng-container>
+
+                                    <!-- sex Column -->
+                                    <ng-container matColumnDef="sex">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef>Giới tính </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
+                                    </ng-container>
+
+                                    <!-- parent Column -->
+                                    <ng-container matColumnDef="parent">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Phụ huynh </th>
+                                        <td mat-cell *matCellDef="let element"><a href="#" data-toggle="modal"
+                                            data-target="#parent"> {{element.parent}} </a></td>
+                                    </ng-container>
+
+                                    <!-- class Column -->
+                                    <ng-container matColumnDef="class">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Lớp học </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.class}} </td>
+                                    </ng-container>
+
+                                    <!-- note Column -->
+                                    <ng-container matColumnDef="note">
+                                        <th class="text-primary" mat-header-cell *matHeaderCellDef> Ghi chú </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+                                    </ng-container>
+
+                                    <!-- action Column -->
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let element" class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button mat-raised-button type="button" matTooltip="Remove"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+
+
+                            <!-- Copyright 2020 Google LLC. All Rights Reserved.
+                                  Use of this source code is governed by an MIT-style license that
+                                  can be found in the LICENSE file at http://angular.io/license -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The modal for create form -->
+            <!-- Buy-Modal-angular -->
+            <div class="modal modal-angular fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <div class="card">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title">Tạo tài khoản học sinh</h4>
+                                    <p class="card-category">Điền đầy đủ thông tin để tạo mới tài khoản</p>
+                                </div>
+                                <div class="card-body">
+                                    <form autocomplete="on" [formGroup]="myForm" (ngSubmit)="createStudent(myForm.value)">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Tên" type="text" formControlName="name">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Họ" type="text">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Choose a date</mat-label>
+                                                    <input matInput [matDatepicker]="picker">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Phụ huynh</mat-label>
+                                                    <mat-select matNativeControl [(ngModel)]="selectedParent" formControlName="parent" name="car">
+                                                      <mat-option value="one">Nguyễn Xuân Trường</mat-option>
+                                                      <mat-option value="two">Đặng Văn Xuyên</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Địa chỉ" type="text">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Thành phố" type="text">
+                                                </mat-form-field>
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Postal Code" type="text">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Ghi chú</label>
+                                                <mat-form-field class="example-full-width">
+                                                    <textarea matInput
+                                                        placeholder="Ghi chú đặc biệt về học sinh."></textarea>
+                                                </mat-form-field>
+                                                <!-- <div class="form-group">
+  
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div> -->
+                                            </div>
+                                        </div>
+                                        <button mat-raised-button type="submit" class="btn btn-danger pull-right">Tạo
+                                            tài khoản</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- the modal to display parent detail-->
+            <div class="modal modal-angular fade" id="parent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                                    <div class="card card-profile">
+                                        
+                                        <!-- <div class="card-avatar">
+                                            
+                                               <img class="img" src="./assets/img/faces/marc.jpg" />
+                                            
+                                        </div> -->
+                                        <div class="card-body">
+                                            <h6 class="card-category text-gray">Phụ huynh </h6>
+                                            <h4 class="card-title">Nguyễn Xuân Trường</h4>
+                                            <div class="card-description">
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <span class="des-text">Điện thoại: 0909 987 987</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <span class="des-text">Email: nguyenxuantruong@gmail.com</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <span class="des-text">Địa chỉ: 16 Nguyễn Đức Thuận, Tân Bình</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <span class="des-text">Username: nguyenxuantruong</span>
+                                                </div>
+                                                
+                                            </div>
+                                            <button type="button" class="btn btn-danger btn-round" data-dismiss="modal">Đóng</button>
+                                            
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
