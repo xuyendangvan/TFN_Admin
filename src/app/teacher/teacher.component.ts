@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ELEMENT_DATA } from 'app/constants/constants';
-import { PeriodicElement } from 'app/student/student.component';
+import { ELEMENT_DATA,PeriodicElement } from 'app/constants/constants';
+
 
 @Component({
   selector: 'app-teacher',
@@ -12,7 +12,7 @@ import { PeriodicElement } from 'app/student/student.component';
 })
 export class TeacherComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'avatar', 'name', 'bday', "sex", 'parent', 'class', 'note', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'phone', 'email', 'username', 'address', 'action'];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   
     // define form group
@@ -33,7 +33,7 @@ export class TeacherComponent implements OnInit {
       this.myForm = new FormGroup({
         name: new FormControl("angular@gmail.com", [Validators.required]),
         bday: new FormControl("abcd1234"),
-        pảent: new FormControl(""),
+        parent: new FormControl(""),
      });
     }
 

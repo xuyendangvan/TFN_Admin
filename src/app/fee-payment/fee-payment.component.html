@@ -1,1 +1,157 @@
-<p>fee-payment works!</p>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            [expanded]="panelOpenState">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="text-primary">
+                    Thống kê học phí
+                </mat-panel-title>
+                <mat-panel-description>
+
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+                <div class="ct-chart" id="FeeViewsChart"></div>   
+            </div>
+            <mat-action-row>
+                <button mat-raised-button color="primary" (click)="createFoodMenu()">Tính học phí cho kỳ này</button>
+                <button mat-button color="primary" (click)="closePanel()">Đóng</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <div class="card">
+            <div class="card-header card-header-tabs card-header-primary">
+                Thông tin tính học phí
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        
+                    </div>
+                    <div class="col-md-3">
+                       
+                    </div>
+                    <div class="col-md-3">
+                       
+                    </div>
+                    <div class="col-md-2">
+                        <label>Đơn vị : VNĐ</label>
+                    </div>
+                </div>
+           
+                <div class="row">
+                    <div class="col-md-3">
+                        <label> Tiền học 1 buổi</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label> Phần ăn</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label> Xe buýt</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label> Vệ sinh</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-primary emphasized"> 100.000</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-primary emphasized"> 20.000</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-primary emphasized"> 15.000</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-primary emphasized"> 10.000</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <button mat-raised-button color="primary" (click)="createFoodMenu()" data-toggle="modal"
+                        data-target="#create" class="pull-right">Cập nhật thông tin tính học phí</button>
+                    </div>
+                </div>
+          
+        </div>
+    </div>
+
+    <div class="modal modal-angular fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Cập nhật thông tin tính học phí</h4>
+                            <p class="card-category"></p>
+                        </div>
+                        <div class="card-body">
+                            <form autocomplete="on" [formGroup]="myForm" (ngSubmit)="createStudent(myForm.value)">
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Tiền học</label>
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="" type="number">
+                                            <span matSuffix>VNĐ &nbsp;</span>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Phần ăn</label>
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="" type="number">
+                                            <span matSuffix>VNĐ &nbsp;</span>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Xe buýt</label>
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="" type="number">
+                                            <span matSuffix>VNĐ &nbsp;</span>
+                                        </mat-form-field>
+                                    </div>
+                               
+                                    <div class="col-md-6">
+                                        <label>Vệ sinh</label>
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="" type="number">
+                                            <span matSuffix>VNĐ &nbsp;</span>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Ghi chú</label>
+                                        <mat-form-field class="example-full-width">
+                                            <textarea matInput
+                                                placeholder="Ghi chú đặc biệt về học sinh."></textarea>
+                                        </mat-form-field>
+                                        <!-- <div class="form-group">
+
+                                <div class="form-group">
+                                    <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                    <textarea class="form-control" rows="5"></textarea>
+                                </div>
+                            </div> -->
+                                    </div>
+                                </div>
+                                <button mat-raised-button type="submit" color="primary" class="btn btn-primary pull-right">Cập nhật</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

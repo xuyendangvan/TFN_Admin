@@ -1,0 +1,182 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            [expanded]="panelOpenState">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="text-primary">
+                    <i class="material-icons">add</i>
+                    Tạo mới thực đơn
+                </mat-panel-title>
+                <mat-panel-description>
+
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Thứ 2</ng-template>
+                        <mat-form-field>
+                          <mat-label>Tên món ăn</mat-label>
+                          <input matInput placeholder="" formControlName="firstCtrl" required>
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Thứ 3">
+                      <form [formGroup]="secondFormGroup">
+                        <mat-form-field>
+                          <mat-label>Tên món ăn</mat-label>
+                          <input matInput formControlName="secondCtrl" required>
+                        </mat-form-field>
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Thứ 4">
+                        <form [formGroup]="secondFormGroup">
+                          <mat-form-field>
+                            <mat-label>Tên món ăn</mat-label>
+                            <input matInput formControlName="secondCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <mat-step [stepControl]="secondFormGroup" label="Thứ 5">
+                        <form [formGroup]="secondFormGroup">
+                          <mat-form-field>
+                            <mat-label>Tên món ăn</mat-label>
+                            <input matInput formControlName="secondCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <mat-step [stepControl]="secondFormGroup" label="Thứ 6">
+                        <form [formGroup]="secondFormGroup">
+                          <mat-form-field>
+                            <mat-label>Tên món ăn</mat-label>
+                            <input matInput formControlName="secondCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <mat-step [stepControl]="secondFormGroup" label="Thứ 7" state="phone">
+                        <form [formGroup]="secondFormGroup">
+                          <mat-form-field>
+                            <mat-label>Tên món ăn</mat-label>
+                            <input matInput formControlName="secondCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <ng-template matStepperIcon="phone">
+                        <mat-icon>fastfood</mat-icon>
+                      </ng-template>
+                    <!-- <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <p>You are now done.</p>
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="stepper.reset()">Reset</button>
+                      </div>
+                    </mat-step>-->
+                  </mat-horizontal-stepper> 
+            </div>
+            <mat-action-row>
+                <button mat-raised-button color="primary" (click)="createFoodMenu()">Tạo Menu</button>
+                <button mat-button color="primary" (click)="closePanel()">Đóng</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <div class="card">
+            <div class="card-header card-header-tabs card-header-primary">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Thực đơn tuần này:</span>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a mat-button class="nav-link active" href="#profile" data-toggle="tab" >
+                                    <i class="material-icons">date_range</i> Thứ 2
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                                    <i class="material-icons">date_range</i> Thứ 3
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                    <i class="material-icons">date_range</i> Thứ 4
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                    <i class="material-icons">date_range</i> Thứ 5
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                    <i class="material-icons">date_range</i> Thứ 6
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                    <i class="material-icons">date_range</i> Thứ 7
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            
+           
+                <div class="row">
+                    <div class="col-md-4">
+                        <label> Bữa sáng</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label> Bữa trưa</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label> Bữa tối</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="text-primary emphasized"> Có kho</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-primary emphasized"> Thịt kho</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-primary emphasized"> Vịt luộc</p>
+                    </div>
+                </div>
+             
+          
+        </div>
+    </div>
+</div>

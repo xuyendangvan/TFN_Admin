@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { TeacherService } from 'app/api';
+import { NotificationData } from 'app/api/model/notificationData';
+import { PeriodicElement } from 'app/student/student.component';
 declare var $: any;
 @Component({
   selector: 'app-notifications',
@@ -9,40 +15,50 @@ export class NotificationsComponent implements OnInit {
 
   panelOpenState = true;
 
-  constructor() { }
-  showNotification(from, align){
-      const type = ['','info','success','warning','danger'];
+  listData: NotificationData[] = [];
 
-      const color = Math.floor((Math.random() * 4) + 1);
+  displayedColumns: string[] = ['id', 'title', 'poster', "postedDate", 'target', 'category', 'action'];
+  dataSource = new MatTableDataSource<NotificationData>(this.listData);
+  
+  // define form group
+  myForm: FormGroup;
 
-      $.notify({
-          icon: "notifications",
-          message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+  name = "";
+  selectedParent = "";
 
-      },{
-          type: type[color],
-          timer: 4000,
-          placement: {
-              from: from,
-              align: align
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">notifications</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private teacherApi: TeacherService){}
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
-  ngOnInit() {
+
+  ngOnInit(){
+    this.getNotificationList();
+    //this.dataSource.paginator = this.paginator;
+
+    this.myForm = new FormGroup({
+      name: new FormControl("angular@gmail.com", [Validators.required]),
+      bday: new FormControl("abcd1234"),
+      parent: new FormControl(""),
+    });
     this.panelOpenState = true
   }
 
   closePanel(){
     this.panelOpenState = false;
+  }
+
+  // Get list of notification
+  getNotificationList(){
+    this.teacherApi.findNotificationByTeacherID(6).subscribe(
+      (value) => {
+        console.log(value);
+        this.dataSource = new MatTableDataSource(value);
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+    
   }
 }

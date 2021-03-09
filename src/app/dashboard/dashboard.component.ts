@@ -9,6 +9,9 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
+  notificationDataSource = [];
+  foodMenuDataSource = [];
+
   constructor(private adminApi: AdminService, private teacherApi: TeacherService) { }
 
   startAnimationForLineChart(chart){
@@ -86,16 +89,15 @@ export class DashboardComponent implements OnInit {
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
       }
       
-      var dailySalesChart = new Chartist.Pie('#dailySalesChart', {
-        series: [30, 40]
+      var dashboardChart = new Chartist.Pie('#dashboardChard', {
+        series: [30, 40],
+        labels: ['Đã xem', 'Chưa xem']
       }, {
-        donut: false,
-        donutWidth: 20,
         startAngle: 0,
-        total: 70
+        total: 70,
       });
 
-      this.startAnimationForLineChart(dailySalesChart);
+      this.startAnimationForLineChart(dashboardChart);
 
 
       /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
@@ -128,7 +130,8 @@ export class DashboardComponent implements OnInit {
       var datawebsiteViewsChart = {
         labels: ['Quý 1/2020', 'Quý 2/2020', 'Quý 3/2020', 'Quý 4/2020', 'Quý 1/2021'],
         series: [
-          [542, 443, 320, 780, 800]
+          {"name": "Tổng", "data": [542, 443, 320, 780, 800]},
+          {"name": "Đã thu", "data": [400, 413, 320, 700, 500]},
 
         ]
       };
@@ -136,6 +139,8 @@ export class DashboardComponent implements OnInit {
           axisX: {
               showGrid: false
           },
+          showLabel:true,
+          name: true,
           low: 0,
           high: 1000,
           chartPadding: { top: 0, right: 5, bottom: 0, left: 0}

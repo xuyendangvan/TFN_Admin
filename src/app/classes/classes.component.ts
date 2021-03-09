@@ -12,7 +12,7 @@ import { PeriodicElement } from 'app/student/student.component';
 })
 export class ClassesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'avatar', 'name', 'bday', "sex", 'parent', 'class', 'note', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'teacher', "studentCount", 'note', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   // define form group
@@ -33,7 +33,7 @@ export class ClassesComponent implements OnInit {
     this.myForm = new FormGroup({
       name: new FormControl("angular@gmail.com", [Validators.required]),
       bday: new FormControl("abcd1234"),
-      pảent: new FormControl(""),
+      parent: new FormControl(""),
    });
   }
 
